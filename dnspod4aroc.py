@@ -4,6 +4,7 @@
 import httplib, urllib
 import socket
 import time
+import datetime
 
 params = dict(
 	login_email="", # replace with your email
@@ -37,10 +38,11 @@ def ddns(ip):
 	conn.request("POST", "/Record.Ddns", urllib.urlencode(params), headers)
 
 	response = conn.getresponse()
-	print response.status, response.reason
+	#print response.status, response.reason
 	data = response.read()
-	print data
+	#print data
 	conn.close()
+	print(str(datetime.datetime.now()) + ": Ip is changed, current ip is " + ip)
 	return response.status == 200
 
 def getip():
@@ -52,11 +54,13 @@ def getip():
 if __name__ == '__main__':
 	try:
 		ip = getip()
-		print ip
+		#print ip
 		current_ip = getLastIp()
 		if current_ip != ip:
 			if ddns(ip):
 				storeIp(ip)
+		else:
+			print(str(datetime.datetime.now()) + ": No change " + ip)
 	except Exception, e:
 		print e
 		pass
