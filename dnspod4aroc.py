@@ -42,7 +42,7 @@ def ddns(ip):
 	data = response.read()
 	#print data
 	conn.close()
-	print(str(datetime.datetime.now()) + ": Ip is changed, current ip is " + ip)
+	print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "  Ip is changed, current ip is " + ip)
 	return response.status == 200
 
 def getip():
@@ -60,7 +60,7 @@ if __name__ == '__main__':
 			if ddns(ip):
 				storeIp(ip)
 		else:
-			print(str(datetime.datetime.now()) + ": No change " + ip)
+			print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "  No change " + ip)
 	except Exception, e:
 		print e
 		pass
