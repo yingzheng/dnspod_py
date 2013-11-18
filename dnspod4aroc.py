@@ -14,7 +14,7 @@ params = dict(
 	sub_domain="@", # replace with your sub_domain
 	record_line="默认"
 )
-record_url = "www.baidu.com"
+
 def getLastIp():
 	ip = ""
 	try:
@@ -43,12 +43,6 @@ def ddns(ip):
 	conn.close()
 	return response.status == 200
 
-def uploadIp(ip):
-	url = record_url + "?cmd=1&ip=" + ip
-	urllib.urlopen(url)
-	pass
-		
-	
 def getip():
 	url = 'http://myip.dnsdynamic.org'
 	page = urllib.urlopen(url)
@@ -58,7 +52,6 @@ def getip():
 if __name__ == '__main__':
 	try:
 		ip = getip()
-		uploadIp(ip)
 		print ip
 		current_ip = getLastIp()
 		if current_ip != ip:
